@@ -1,4 +1,5 @@
 "use client"
+
 import TableComponent from './Table';
 import { PLAYER_DATA } from './data';
 

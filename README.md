@@ -1,14 +1,3 @@
-### [⬇️ Download Now](https://tailadmin.com/download)
-
-### [⚡ Get PRO Version](https://tailadmin.com/pricing)
-
-### [📄 Documentation/Installation](https://tailadmin.com/docs)
-
-### [🖌️ TailAdmin Figma Free Sample](https://www.figma.com/community/file/1214477970819985778)
-
-### [👉 TailAdmin HTML Version](https://github.com/TailAdmin/tailadmin-free-tailwind-dashboard-template)
-
-
 ## Installation
 
 Here are the steps you need to follow to install the dependencies.

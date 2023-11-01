@@ -2,7 +2,7 @@ import Pagination from "@/app/table/Pagination";
 import { PLAYER_DATA } from "@/app/table/data";
 import { filterRows, paginateRows, sortRows } from "@/app/table/tableHelpers";
 import { BRAND } from "@/types/brand";
-import { Input, Table, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react";
+import { Heading, Input, Table, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react";
 import Image from "next/image";
 import { useMemo, useState } from "react";
 
@@ -24,7 +24,7 @@ const columns: Column[] = [
   { accessor: 'minutes_played', label: 'Minutes Played' },
   { accessor: 'shots_on_goal', label: 'Shots On Goal' },
   { accessor: 'shots_off_target', label: 'Shots Off Target' },
-  { accessor: 'pass_completion_percent', label: 'Pass Completion %', format: value => `${value * 100}%` },
+  { accessor: 'pass_completion_percent', label: 'Pass Completion %', format: value => `${Math.floor(value * 100)}%` },
   { accessor: 'tackles', label: 'Tackles' },
   { accessor: 'interceptions', label: 'Interceptions' },
   { accessor: 'fouls_committed', label: 'Fouls Committed' },
@@ -96,10 +96,10 @@ const TableOne = () => {
 
   return (
     <div className="h-full container mx-auto p-6">
-      <div className="h-full max-w-full overflow-x-auto">
-        <table className="bg-white border border-gray-300 table-auto">
-          <thead className="sticky z-3 top-0 bg-white border-b">
-            <tr>
+      <div className="h-full max-w-full overflow-x-auto h-[675px]">
+        <Table style={{ position: 'relative', width: '100%'}} className="border-separate border-spacing-0">
+          <Thead style={{ position: 'sticky', zIndex: '4', top: '0', backgroundColor: '#1a222c' }}>
+            <Tr>
               {columns.map(column => {
                 const sortIcon = () => {
                   if (column.accessor === sort.orderBy) {
@@ -113,45 +113,39 @@ const TableOne = () => {
                 }
 
                 return (
-                  <th key={column.accessor} className="py-2 px-4 border-b min-w-[250px] w-fit" onClick={() => handleSort(column.accessor)}>
-                    <span>{column.label}</span>
-                    <button>{sortIcon()}</button>
-                  </th>
+                  <Th key={column.accessor} className="border-white min-w-[250px] w-full h-full z-40">
+                      <div className='text-white w-full flex items-center gap-5 cursor-pointer' onClick={() => handleSort(column.accessor)}>
+                        <Heading size='sm'>{column.label}</Heading>
+                        <button className="text-lg">{sortIcon()}</button>
+                      </div>
+                      <Input
+                        key={`${column.accessor}-search`}
+                        id={`${column.accessor}-search`}
+                        type="search"
+                        placeholder={`Search ${column.label}`}
+                        value={filters[column.accessor]}
+                        onChange={event => handleSearch(event.target.value, column.accessor)}
+                      />
+                  </Th>
                 )
               })}
-            </tr>
-            <tr>
-              {columns.map(column => {
-                return (
-                  <th key={column.accessor} className="py-2 px-4 border-b">
-                    <Input
-                      key={`${column.accessor}-search`}
-                      id={`${column.accessor}-search`}
-                      type="search"
-                      placeholder={`Search ${column.label}`}
-                      value={filters[column.accessor]}
-                      onChange={event => handleSearch(event.target.value, column.accessor)}
-                    />
-                  </th>
-                )
-              })}
-            </tr>
-          </thead>
+            </Tr>
+          </Thead>
           <tbody>
-              {calculatedRows.map(row => {
-                return (
-                  <tr key={row.id} className="max-h-[250px] overflow-auto">
-                    {columns.map(column => {
-                      if (column.format) {
-                        return <td key={column.accessor} className="py-2 px-4 border-b">{column.format(row[column.accessor])}</td>
-                      }
-                      return <td key={column.accessor} className="py-2 px-4 border-b">{row[column.accessor]}</td>
-                    })}
-                  </tr>
-                )
-              })}
+            {calculatedRows.map(row => {
+              return (
+                <tr key={row.id} className="max-h-[250px] overflow-auto">
+                  {columns.map(column => {
+                    if (column.format) {
+                      return <td key={column.accessor} className="py-2 px-4 border-b">{column.format(row[column.accessor])}</td>
+                    }
+                    return <td key={column.accessor} className="py-2 px-4 border-b">{row[column.accessor]}</td>
+                  })}
+                </tr>
+              )
+            })}
           </tbody>
-        </table>
+        </Table>
       </div>
       {count > 0 ? (
         <Pagination

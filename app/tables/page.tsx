@@ -18,7 +18,7 @@ const TablesPage = () => {
     <>
       <Breadcrumb pageName="Tables" />
 
-      <div className="flex flex-col gap-10 w-full max-h-10/12">
+      <div className="flex flex-col gap-10 w-full h-8/12">
         <TableOne />
         {/* <TableTwo />
         <TableThree /> */}

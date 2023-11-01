@@ -1,7 +1,7 @@
 "use client"
 
 import TableComponent from './Table';
-import { PLAYER_DATA } from './data';
+import { PLAYER_DATA } from '../assets/data';
 
 export type Column = {
     accessor: string;

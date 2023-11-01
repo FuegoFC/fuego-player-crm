@@ -6,7 +6,7 @@ import TableThree from "@/components/Tables/TableThree";
 import TableTwo from "@/components/Tables/TableTwo";
 
 import { Metadata } from "next";
-import { PLAYER_DATA } from "../table/data";
+import { PLAYER_DATA } from "../assets/data";
 export const metadata: Metadata = {
   title: "Tables Page | Next.js E-commerce Dashboard Template",
   description: "This is Tables page for TailAdmin Next.js",

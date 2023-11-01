@@ -1,8 +1,8 @@
 import Pagination from "@/app/table/Pagination";
-import { PLAYER_DATA } from "@/app/table/data";
+import { PLAYER_DATA } from "@/app/assets/data";
 import { filterRows, paginateRows, sortRows } from "@/app/table/tableHelpers";
 import { BRAND } from "@/types/brand";
-import { Heading, Input, Table, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react";
+import { Box, Heading, Input, Table, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react";
 import Image from "next/image";
 import { useMemo, useState } from "react";
 
@@ -96,7 +96,7 @@ const TableOne = () => {
 
   return (
     <div className="h-full container mx-auto p-6">
-      <div className="h-full max-w-full overflow-x-auto h-[675px]">
+      <Box height='675px' overflow={'auto'}>
         <Table style={{ position: 'relative', width: '100%'}} className="border-separate border-spacing-0">
           <Thead style={{ position: 'sticky', zIndex: '4', top: '0', backgroundColor: '#1a222c' }}>
             <Tr>
@@ -134,7 +134,7 @@ const TableOne = () => {
           <tbody>
             {calculatedRows.map(row => {
               return (
-                <tr key={row.id} className="max-h-[250px] overflow-auto">
+                <tr key={row.id} className="max-h-[250px] overflow-auto hover:bg-slate-500">
                   {columns.map(column => {
                     if (column.format) {
                       return <td key={column.accessor} className="py-2 px-4 border-b">{column.format(row[column.accessor])}</td>
@@ -146,7 +146,7 @@ const TableOne = () => {
             })}
           </tbody>
         </Table>
-      </div>
+      </Box>
       {count > 0 ? (
         <Pagination
           activePage={activePage}

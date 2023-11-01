@@ -131,20 +131,20 @@ const TableOne = () => {
               })}
             </Tr>
           </Thead>
-          <tbody>
+          <Tbody>
             {calculatedRows.map(row => {
               return (
-                <tr key={row.id} className="max-h-[250px] overflow-auto hover:bg-slate-500">
+                <Tr key={row.id} className="max-h-[250px] overflow-auto dark:hover:bg-slate-500 hover:bg-slate-800 hover:text-white">
                   {columns.map(column => {
                     if (column.format) {
-                      return <td key={column.accessor} className="py-2 px-4 border-b">{column.format(row[column.accessor])}</td>
+                      return <Td key={column.accessor} className="py-2 px-4 border-b">{column.format(row[column.accessor])}</Td>
                     }
-                    return <td key={column.accessor} className="py-2 px-4 border-b">{row[column.accessor]}</td>
+                    return <Td key={column.accessor} className="py-2 px-4 border-b">{row[column.accessor]}</Td>
                   })}
-                </tr>
+                </Tr>
               )
             })}
-          </tbody>
+          </Tbody>
         </Table>
       </Box>
       {count > 0 ? (

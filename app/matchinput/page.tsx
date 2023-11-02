@@ -18,7 +18,8 @@ const MatchInput = () => {
     };
 
     return (
-        <Box className="pitch" onClick={handleClick} >
+        <Box className="pitch">
+            <Box className="overlay" onClick={handleClick}></Box>
             <Box className="field left">
                 <Box className="penalty-area">
                 </Box>

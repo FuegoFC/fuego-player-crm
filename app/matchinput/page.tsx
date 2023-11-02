@@ -5,7 +5,11 @@ import React, { useState, useRef } from 'react'
 
 type Coordinate = {
     x: number,
-    y: number
+    y: number,
+}
+
+type PassCoordinates = Coordinate & {
+    passer: boolean;
 }
 
 type PassPath = {
@@ -18,11 +22,11 @@ type MatchInputProps = {
 }
 
 const MatchInput = (props: MatchInputProps) => {
-    const { actionType = 'shot' } = props;
+    const { actionType = 'pass' } = props;
     const canvasRef = useRef(null); 
     const [passPath, setPassPath] = useState<PassPath[]>([]);
     const [shotCoordinates, setShotCoordinates] = useState<Coordinate[]>([]);
-    const [passCoordinates, setPassCoordinates] = useState<Coordinate[]>([]);
+    const [passCoordinates, setPassCoordinates] = useState<PassCoordinates[]>([]);
     const [isMouseDown, setIsMouseDown] = useState(false);
     const [startPoint, setStartPoint] = useState<Coordinate | null>(null);
 
@@ -43,7 +47,7 @@ const MatchInput = (props: MatchInputProps) => {
         const y = e.clientY - rect.top;
     
         setStartPoint({ x, y });
-        setPassCoordinates([...passCoordinates, {x, y}])
+        setPassCoordinates([...passCoordinates, {x, y, passer: true}])
       };
     
       const handleMouseUp = (e) => {
@@ -54,7 +58,7 @@ const MatchInput = (props: MatchInputProps) => {
     
           const pass = { start: startPoint, end: { x, y } };
           setPassPath([...passPath, pass]);
-          setPassCoordinates([...passCoordinates, {x, y}])
+          setPassCoordinates([...passCoordinates, {x, y, passer: false}])
           setStartPoint(null);
         }
         setIsMouseDown(false);
@@ -80,7 +84,7 @@ const MatchInput = (props: MatchInputProps) => {
                 <Box key={index} position={'absolute'} width={'10px'} height={'10px'} backgroundColor={'#ff0000'} borderRadius={'50%'} zIndex={1} style={{ left: coord.x, top: coord.y }} />
             ))}
             {actionType === 'pass' && passCoordinates.map((coord, index) => (
-                <Box key={index} position={'absolute'} width={'10px'} height={'10px'} backgroundColor={'yellow'} borderRadius={'50%'} style={{ left: coord.x, top: coord.y }} />
+                <Box key={index} position={'absolute'} width={'10px'} height={'10px'} backgroundColor={coord.passer ? 'blue' : 'yellow'} borderRadius={'50%'} style={{ left: coord.x, top: coord.y }} />
             ))}
             {actionType === 'pass' && <svg className="canvas">
                 {passPath.map((pass, index) => (
@@ -89,7 +93,7 @@ const MatchInput = (props: MatchInputProps) => {
                     d={`M ${pass.start.x} ${pass.start.y} L ${pass.end.x} ${pass.end.y}`}
                     stroke="blue"
                     strokeWidth="2"
-                    strokeDasharray={'10,10'}
+                    strokeDasharray={'5,5'}
                     fill="transparent"
                 />
                 ))}

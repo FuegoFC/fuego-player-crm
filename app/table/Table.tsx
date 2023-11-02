@@ -8,8 +8,8 @@ import {
   Td,
   Input,
 } from '@chakra-ui/react'
-import Pagination from './Pagination';
-import { filterRows, paginateRows, sortRows } from './tableHelpers';
+import Pagination from '../../components/Tables/Pagination';
+import { filterRows, paginateRows, sortRows } from '../../components/Tables/tableHelpers';
 import type { Column } from './page';
 
 type props = {

@@ -1,6 +1,6 @@
-import Pagination from "@/app/table/Pagination";
+import Pagination from "@/components/Tables/Pagination";
 import { PLAYER_DATA } from "@/app/assets/data";
-import { filterRows, paginateRows, sortRows } from "@/app/table/tableHelpers";
+import { filterRows, paginateRows, sortRows } from "@/components/Tables/tableHelpers";
 import { BRAND } from "@/types/brand";
 import { Box, Heading, Input, Table, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react";
 import Image from "next/image";
@@ -43,7 +43,7 @@ const columns: Column[] = [
 
 
 const PlayerTable = () => {
-  const rows = [...PLAYER_DATA]
+  const rows = useMemo(() => [...PLAYER_DATA], [])
 
   console.log(rows, columns)
 

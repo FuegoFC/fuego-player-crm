@@ -2,6 +2,7 @@
 import "./globals.css";
 import "./data-tables-css.css";
 import "./satoshi.css";
+import './style/soccerfield.css'
 import { useState, useEffect } from "react";
 import Loader from "@/components/common/Loader";
 

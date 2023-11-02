@@ -3,13 +3,28 @@
 import { Box } from '@chakra-ui/react';
 import React, { useState, useRef } from 'react'
 
-const MatchInput = () => {
-    const canvasRef = useRef(null);
-    const [passPath, setPassPath] = useState([]);
-    const [shotCoordinates, setShotCoordinates] = useState([]);
-    const [passCoordinates, setPassCoordinates] = useState([]);
+type Coordinate = {
+    x: number,
+    y: number
+}
+
+type PassPath = {
+    start: Coordinate,
+    end: Coordinate
+}
+
+type MatchInputProps = {
+    actionType: string;
+}
+
+const MatchInput = (props: MatchInputProps) => {
+    const { actionType = 'shot' } = props;
+    const canvasRef = useRef(null); 
+    const [passPath, setPassPath] = useState<PassPath[]>([]);
+    const [shotCoordinates, setShotCoordinates] = useState<Coordinate[]>([]);
+    const [passCoordinates, setPassCoordinates] = useState<Coordinate[]>([]);
     const [isMouseDown, setIsMouseDown] = useState(false);
-    const [startPoint, setStartPoint] = useState(null);
+    const [startPoint, setStartPoint] = useState<Coordinate | null>(null);
 
     const handleClick = (e) => {
         console.log(e);
@@ -45,9 +60,11 @@ const MatchInput = () => {
         setIsMouseDown(false);
       };
 
+      console.log(shotCoordinates)
+
     return (
         <Box className="pitch">
-            <Box className="overlay" onClick={handleClick} onMouseDown={handleMouseDown} onMouseUp={handleMouseUp}>
+            <Box className="overlay" onClick={(e) => actionType === 'shot' ? handleClick(e) : null} onMouseDown={(e) => actionType === 'pass' ? handleMouseDown(e) : null } onMouseUp={(e) => actionType === 'pass' ? handleMouseUp(e) : null }>
             <canvas ref={canvasRef} className="canvas"></canvas>
             </Box>
             <Box className="field left">
@@ -59,23 +76,24 @@ const MatchInput = () => {
                 </Box>
             </Box>
             <Box className="center-circle"></Box>
-            {shotCoordinates.map((coord, index) => (
+            {actionType === 'shot' && shotCoordinates.map((coord, index) => (
                 <Box key={index} position={'absolute'} width={'10px'} height={'10px'} backgroundColor={'#ff0000'} borderRadius={'50%'} zIndex={1} style={{ left: coord.x, top: coord.y }} />
             ))}
-            {passCoordinates.map((coord, index) => (
+            {actionType === 'pass' && passCoordinates.map((coord, index) => (
                 <Box key={index} position={'absolute'} width={'10px'} height={'10px'} backgroundColor={'yellow'} borderRadius={'50%'} style={{ left: coord.x, top: coord.y }} />
             ))}
-            <svg className="canvas">
+            {actionType === 'pass' && <svg className="canvas">
                 {passPath.map((pass, index) => (
                 <path
                     key={index}
                     d={`M ${pass.start.x} ${pass.start.y} L ${pass.end.x} ${pass.end.y}`}
                     stroke="blue"
                     strokeWidth="2"
+                    strokeDasharray={'10,10'}
                     fill="transparent"
                 />
                 ))}
-            </svg>
+            </svg>}
         </Box>
 
     );

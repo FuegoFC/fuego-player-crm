@@ -1,7 +1,5 @@
 /* eslint-disable eqeqeq */
 
-import type { Row } from "./page"
-
 export function isEmpty(obj = {}) {
   return Object.keys(obj).length === 0
 }
@@ -55,12 +53,12 @@ export function convertType(value: any) {
   return value
 }
 
-export function filterRows(rows: Row[], filters: { [key: string]: string | number }) {
+export function filterRows(rows: any[], filters: { [key: string]: string | number }) {
   if (isEmpty(filters)) return rows
 
   return rows.filter((row) => {
     return Object.keys(filters).every((accessor) => {
-      const value = row[accessor as keyof Row]
+      const value = row[accessor as keyof any]
       const searchValue = filters[accessor]
 
       if (isString(value)) {
@@ -80,27 +78,27 @@ export function filterRows(rows: Row[], filters: { [key: string]: string | numbe
   })
 }
 
-export function sortRows(rows: Row[], sort: {
+export function sortRows(rows: any[], sort: {
   order: string;
   orderBy: string;
 }) {
   return rows.sort((a, b) => {
     const { order, orderBy } = sort
 
-    if (isNil(a[orderBy as keyof Row])) return 1
-    if (isNil(b[orderBy as keyof Row])) return -1
+    if (isNil(a[orderBy as keyof any])) return 1
+    if (isNil(b[orderBy as keyof any])) return -1
 
-    const aLocale = convertType(a[orderBy as keyof Row])
-    const bLocale = convertType(b[orderBy as keyof Row])
+    const aLocale = convertType(a[orderBy as keyof any])
+    const bLocale = convertType(b[orderBy as keyof any])
 
     if (order === 'asc') {
-      return aLocale.localeCompare(bLocale, 'en', { numeric: isNumber(b[orderBy as keyof Row]) })
+      return aLocale.localeCompare(bLocale, 'en', { numeric: isNumber(b[orderBy as keyof any]) })
     } else {
-      return bLocale.localeCompare(aLocale, 'en', { numeric: isNumber(a[orderBy as keyof Row]) })
+      return bLocale.localeCompare(aLocale, 'en', { numeric: isNumber(a[orderBy as keyof any]) })
     }
   })
 }
 
-export function paginateRows(sortedRows: Row[], activePage: number, rowsPerPage: number) {
+export function paginateRows(sortedRows: any[], activePage: number, rowsPerPage: number) {
   return [...sortedRows].slice((activePage - 1) * rowsPerPage, activePage * rowsPerPage)
 }

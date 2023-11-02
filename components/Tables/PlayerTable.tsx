@@ -42,7 +42,7 @@ const columns: Column[] = [
 ]
 
 
-const TableOne = () => {
+const PlayerTable = () => {
   const rows = [...PLAYER_DATA]
 
   console.log(rows, columns)
@@ -168,4 +168,4 @@ const TableOne = () => {
   );
 };
 
-export default TableOne;
+export default PlayerTable;

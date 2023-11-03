@@ -4,7 +4,7 @@ import Pagination from "@/components/Tables/Pagination";
 import PLAYER_DATA from "@/app/assets/data.json";
 import { filterRows, paginateRows, sortRows } from "@/components/Tables/tableHelpers";
 import { BRAND } from "@/types/brand";
-import { Box, Heading, Input, Table, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react";
+import { Box, Heading, Input, Table, Tbody, Td, Th, Thead, Tr, useColorModeValue } from "@chakra-ui/react";
 import Image from "next/image";
 import { useMemo, useState } from "react";
 
@@ -102,7 +102,7 @@ const PlayerTable = () => {
     <div className="h-full container mx-auto p-6">
       <Box height='675px' overflow={'auto'}>
         <Table style={{ position: 'relative', width: '100%'}} className="border-separate border-spacing-0">
-          <Thead style={{ position: 'sticky', zIndex: '4', top: '0', backgroundColor: '#1a222c' }}>
+          <Thead style={{ position: 'sticky', zIndex: '4', top: '0', backgroundColor: useColorModeValue('#276ec7', '#1a222c') }}>
             <Tr>
               {columns.map(column => {
                 const sortIcon = () => {
@@ -138,7 +138,7 @@ const PlayerTable = () => {
           <Tbody>
             {calculatedRows.map(row => {
               return (
-                <Tr key={row.id} className="max-h-[250px] overflow-auto dark:hover:bg-slate-500 hover:bg-slate-800 hover:text-white">
+                <Tr key={row.id} className="max-h-[250px] overflow-auto dark:hover:bg-slate-500 hover:bg-[#276ec7] hover:text-white">
                   {columns.map(column => {
                     if (column.format) {
                       return <Td key={column.accessor} className="py-2 px-4 border-b">{column.format(row[column.accessor])}</Td>

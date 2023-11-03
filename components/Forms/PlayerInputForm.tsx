@@ -1,27 +1,94 @@
 "use client"
 
-import { Box, Heading, InputGroup, InputLeftAddon, Input } from '@chakra-ui/react'
+import { Box, Heading, InputGroup, InputLeftAddon, Input, Select, InputRightAddon, FormControl, FormLabel } from '@chakra-ui/react'
 import React from 'react'
 
+const POSITION_OPTIONS = [
+	{
+		id: 1,
+		value: 1
+	},
+	{
+		id: 2,
+		value: 2
+	},
+	{
+		id: 3,
+		value: 3
+	},
+	{
+		id: 4,
+		value: 4
+	},
+	{
+		id: 5,
+		value: 5
+	},
+	{
+		id: 6,
+		value: 6
+	},
+	{
+		id: 7,
+		value: 7
+	},
+	{
+		id: 8,
+		value: 8
+	},
+	{
+		id: 9,
+		value: 9
+	},
+	{
+		id: 10,
+		value: 10
+	}
+]
+
 const PlayerInputForm = () => {
-  return (
-    <Box margin={'10px'}>
-        <Heading size='sm'>Input Form</Heading>
-        <div className="flex flex-col gap-9">
-          {/* <!-- Contact Form --> */}
-          <div className="rounded-sm border border-stroke shadow-default dark:border-strokedark dark:bg-boxdark">
-            <InputGroup>
-                <InputLeftAddon>First Name</InputLeftAddon>
-                <Input type='text' placeholder='First Name' />
-            </InputGroup>
-            <InputGroup>
-                <InputLeftAddon>Last Name</InputLeftAddon>
-                <Input type='text' placeholder='Last Name' />
-            </InputGroup>
-          </div>
-        </div>
-    </Box>
-  )
+	return (
+		<Box margin={'10px'}>
+			<Heading size='sm'>Input Form</Heading>
+			<Box className="flex flex-col gap-5 p-5 rounded-sm border border-stroke shadow-default dark:border-strokedark dark:bg-boxdark">
+				{/* <!-- Contact Form --> */}
+				<Box className="flex" flexDirection={{ base: 'column', md: 'row' }} gap={'5'}>
+					<InputGroup size={'sm'}>
+						<Input type='text' placeholder='First Name' />
+					</InputGroup>
+					<InputGroup size={'sm'}>
+						<Input type='text' placeholder='Last Name' />
+					</InputGroup>
+				</Box>
+				<Box className="flex" flexDirection={{ base: 'column', md: 'row' }} gap={'5'}>
+					<InputGroup size={'sm'}>
+						<Input type='email' placeholder='Email' />
+					</InputGroup>
+					<InputGroup size={'sm'}>
+						<Input type='tel' placeholder='Phone' />
+					</InputGroup>
+				</Box>
+				<Box className="flex" flexDirection={{ base: 'column', md: 'row' }} gap={'5'}>
+					<Select placeholder='Select Position'>
+						{POSITION_OPTIONS.map((position) => (
+							<option key={position.id}>{position.value}</option>
+						))}
+					</Select>
+					<FormControl>
+						<FormLabel>Height</FormLabel>
+						<InputGroup size={'sm'}>
+							<Input type='number' placeholder='Feet' />
+							<Input type='number' placeholder='Inches' />
+						</InputGroup>
+					</FormControl>
+					<InputGroup size={'sm'}>
+						<Input type='number' placeholder='weight' />
+						<InputRightAddon>lbs.</InputRightAddon>
+					</InputGroup>
+				</Box>
+			</Box>
+		</Box>
+	)
 }
 
 export default PlayerInputForm

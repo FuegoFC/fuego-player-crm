@@ -1,4 +1,4 @@
-export const player_match_data = [
+[
     {
       "date": "2023-08-15",
       "pass_completion_percent": 87,

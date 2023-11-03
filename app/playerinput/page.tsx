@@ -1,13 +1,15 @@
+"use client"
+
 import PlayerInputForm from '@/components/Forms/PlayerInputForm';
-import { Heading } from '@chakra-ui/react';
+import { Box, Heading } from '@chakra-ui/react';
 import React from 'react'
 
 const PlayerInput = () => {
     return (
-        <div>
+        <Box margin={'10px'}>
             <Heading size={'lg'}>Input</Heading>
             <PlayerInputForm />
-        </div>
+        </Box>
     )
 }
 

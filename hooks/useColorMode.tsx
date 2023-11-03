@@ -3,18 +3,18 @@ import { useEffect } from "react";
 import useLocalStorage from "./useLocalStorage";
 
 const useColorMode = () => {
-  const [colorMode, setColorMode] = useLocalStorage("color-theme", "light");
+  const [tailwindColorMode, setTailwindColorMode] = useLocalStorage("color-theme", "light");
 
   useEffect(() => {
     const className = "dark";
     const bodyClass = window.document.body.classList;
 
-    colorMode === "dark"
+    tailwindColorMode === "dark"
       ? bodyClass.add(className)
       : bodyClass.remove(className);
-  }, [colorMode]);
+  }, [tailwindColorMode]);
 
-  return [colorMode, setColorMode];
+  return [tailwindColorMode, setTailwindColorMode];
 };
 
 export default useColorMode;

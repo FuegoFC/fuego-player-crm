@@ -1,3 +1,5 @@
+"use client"
+
 import FieldInput from '@/components/Inputs/FieldInput'
 import { Box, Heading } from '@chakra-ui/react'
 import React from 'react'

@@ -1,5 +1,7 @@
+"use client"
+
 import Pagination from "@/components/Tables/Pagination";
-import { PLAYER_DATA } from "@/app/assets/data";
+import PLAYER_DATA from "@/app/assets/data.json";
 import { filterRows, paginateRows, sortRows } from "@/components/Tables/tableHelpers";
 import { BRAND } from "@/types/brand";
 import { Box, Heading, Input, Table, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react";
@@ -45,7 +47,7 @@ const columns: Column[] = [
 
 
 const PlayerTable = () => {
-  const rows = useMemo(() => [...PLAYER_DATA], [])
+  const rows = useMemo(() => PLAYER_DATA, [])
 
   console.log(rows, columns)
 

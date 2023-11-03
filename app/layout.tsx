@@ -9,7 +9,6 @@ import Loader from "@/components/common/Loader";
 import Sidebar from "@/components/Sidebar";
 import Header from "@/components/Header";
 import { Providers } from "./providers";
-import { ColorModeScript } from "@chakra-ui/react";
 
 export default function RootLayout({
 	children,
@@ -28,7 +27,6 @@ export default function RootLayout({
 		<html lang="en">
 			<body suppressHydrationWarning={true}>
 				<Providers>
-					<ColorModeScript initialColorMode={'dark'} />
 					<div className="dark:bg-boxdark-2 dark:text-bodydark">
 						{loading ? (
 							<Loader />

@@ -10,7 +10,9 @@ const page = () => {
         <Heading>Input Page</Heading>
         <Box>
             <Heading size={'sm'}>Shot Tracker</Heading>
-            <FieldInput actionType='shot' />
+            <Box width={'700px'}>
+              <FieldInput actionType='shot' />
+            </Box>
         </Box>
         <Box>
             <Heading size={'sm'}>Pass Tracker</Heading>

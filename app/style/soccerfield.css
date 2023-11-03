@@ -4,6 +4,7 @@
     height: 380px;
     position: relative;
 }
+
 .pitch:after {
     content: '';
     border-left: 1px solid white;
@@ -60,27 +61,27 @@
 
 .penalty-area {
     position: absolute;
-    height: 140px;
-    width: 80px;
-    top: 120px;
+    height: 36%;
+    width: 13.5%;
+    top: 31.5%;
     border: 1px solid white;
 }
 
 .left .penalty-area {
-    left: 20px;
+    left: 5%;
     border-left: 0;
 }
 
 .right .penalty-area {
-    right: 19px;
+    right: 5%;
     border-right: 0;
 }
 
 .penalty-area:before {
     position: absolute;
-    height: 70px;
-    width: 35px;
-    top: 35px;
+    height: 50%;
+    width: 43.9%;
+    top: 25%;
     border: 1px solid white;
     content: '';
 }
@@ -95,17 +96,17 @@
 
 .penalty-area:after {
     position: absolute;
-    height: 2px;
-    width: 2px;
-    top: 70px;
+    height: 1.4%;
+    width: 2.5%;
+    top: 50%;
     background-color: white;
     content: '';
 }
 .left .penalty-area:after {
-    right: 15px;
+    right: 18.8%;
 }
 .right .penalty-area:after {
-    left: 15px;
+    left: 18.8%;
 }
 
 .canvas {
@@ -119,8 +120,8 @@
 
 .pass-dot {
     position: absolute;
-    width: 8px;
-    height: 8px;
+    width: 8%;
+    height: 8%;
     background-color: blue;
     border-radius: 50%;
 }

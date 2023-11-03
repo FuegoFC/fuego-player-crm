@@ -212,6 +212,7 @@ const FieldInput = (props: FieldInputProps) => {
 
     useEffect(() => {
         if(canvasRef.current) {
+            console.log(canvasRef.current.offsetWidth)
             setContainerWidth(canvasRef.current.offsetWidth);
         }
     }, [])

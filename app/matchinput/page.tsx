@@ -14,7 +14,7 @@ const page = () => {
               <FieldInput actionType='shot' />
             </Box>
         </Box>
-        <Box>
+        <Box width={'400px'}>
             <Heading size={'sm'}>Pass Tracker</Heading>
             <FieldInput actionType='pass' />
         </Box>

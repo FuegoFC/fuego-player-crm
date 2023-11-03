@@ -2,6 +2,8 @@
 
 import { Box, Heading, InputGroup, InputLeftAddon, Input, Select, InputRightAddon, FormControl, FormLabel } from '@chakra-ui/react'
 import React from 'react'
+import AutocompleteInput from '../Inputs/AutocompleteInput';
+import data from '../../app/assets/data.json'
 
 const POSITION_OPTIONS = [
 	{
@@ -86,6 +88,15 @@ const PlayerInputForm = () => {
 						<InputRightAddon>lbs.</InputRightAddon>
 					</InputGroup>
 				</Box>
+				<FormControl>
+					<FormLabel>Autocomplete</FormLabel>
+					<AutocompleteInput
+						options={data.map((player) => ({
+							id: player.id,
+							label: [player.first_name, player.last_name].join(' ')
+						}))}
+					/>
+				</FormControl>
 			</Box>
 		</Box>
 	)

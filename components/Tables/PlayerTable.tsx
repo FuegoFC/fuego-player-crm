@@ -10,35 +10,37 @@ import { useMemo, useState } from "react";
 export type Column = {
   accessor: string;
   label: string;
+  sortable?: boolean,
+  searchable?: boolean, 
   format?: (value: any) => any;
 }
 
 const columns: Column[] = [
-  { accessor: 'first_name', label: 'First Name' },
-  { accessor: 'last_name', label: 'Last Name' },
-  { accessor: 'positions', label: 'Position' },
-  { accessor: 'email', label: 'Email' },
-  { accessor: 'phone', label: 'Phone' },
-  { accessor: 'goals_scored', label: 'Goals Scored' },
-  { accessor: 'assists', label: 'Assists' },
-  { accessor: 'minutes_played', label: 'Minutes Played' },
-  { accessor: 'shots_on_goal', label: 'Shots On Goal' },
-  { accessor: 'shots_off_target', label: 'Shots Off Target' },
-  { accessor: 'pass_completion_percent', label: 'Pass Completion %', format: value => `${Math.floor(value * 100)}%` },
-  { accessor: 'tackles', label: 'Tackles' },
-  { accessor: 'interceptions', label: 'Interceptions' },
-  { accessor: 'fouls_committed', label: 'Fouls Committed' },
-  { accessor: 'fouls_received', label: 'Fouls Received' },
-  { accessor: 'yellow_cards', label: 'Yellow Cards' },
-  { accessor: 'red_cards', label: 'Red Cards' },
-  { accessor: 'saves', label: 'Saves', format: value => value ? value : 'N/A' },
-  { accessor: 'clean_sheets', label: 'Clean Sheets', format: value => value ? value : 'N/A' },
-  { accessor: 'height', label: 'Height' },
-  { accessor: 'weight', label: 'Weight' },
-  { accessor: 'distance_covered', label: 'Distance Covered (km)' },
-  { accessor: 'speed_forty_yards', label: 'Forty Yard Dash' },
-  { accessor: 'endurance_beep_test', label: 'Beep Test' },
-  { accessor: 'strength_bench_press', label: 'Bench Press' },
+  { accessor: 'first_name', sortable: true, searchable: true, label: 'First Name' },
+  { accessor: 'last_name', sortable: true, searchable: true, label: 'Last Name' },
+  { accessor: 'positions', sortable: true, searchable: true, label: 'Position' },
+  { accessor: 'email', sortable: true, searchable: true, label: 'Email' },
+  { accessor: 'phone', sortable: true, searchable: true, label: 'Phone' },
+  { accessor: 'goals_scored', sortable: true, searchable: true, label: 'Goals Scored' },
+  { accessor: 'assists', sortable: true, searchable: true, label: 'Assists' },
+  { accessor: 'minutes_played', sortable: true, searchable: true, label: 'Minutes Played' },
+  { accessor: 'shots_on_goal', sortable: true, searchable: true, label: 'Shots On Goal' },
+  { accessor: 'shots_off_target', sortable: true, searchable: true, label: 'Shots Off Target' },
+  { accessor: 'pass_completion_percent', sortable: true, searchable: true, label: 'Pass Completion %', format: value => `${Math.floor(value * 100)}%` },
+  { accessor: 'tackles', sortable: true, searchable: true, label: 'Tackles' },
+  { accessor: 'interceptions', sortable: true, searchable: true, label: 'Interceptions' },
+  { accessor: 'fouls_committed', sortable: true, searchable: true, label: 'Fouls Committed' },
+  { accessor: 'fouls_received', sortable: true, searchable: true, label: 'Fouls Received' },
+  { accessor: 'yellow_cards', sortable: true, searchable: true, label: 'Yellow Cards' },
+  { accessor: 'red_cards', sortable: true, searchable: true, label: 'Red Cards' },
+  { accessor: 'saves', sortable: true, searchable: true, label: 'Saves', format: value => value ? value : 'N/A' },
+  { accessor: 'clean_sheets', sortable: true, searchable: true, label: 'Clean Sheets', format: value => value ? value : 'N/A' },
+  { accessor: 'height', label: 'Height', format: value => value ? `${value.feet}' ${value.inches}"` : 'n/a'},
+  { accessor: 'weight', sortable: true, searchable: true, label: 'Weight' },
+  { accessor: 'distance_covered', sortable: true, searchable: true, label: 'Distance Covered (km)' },
+  { accessor: 'speed_forty_yards', sortable: true, searchable: true, label: 'Forty Yard Dash' },
+  { accessor: 'endurance_beep_test', sortable: true, searchable: true, label: 'Beep Test' },
+  { accessor: 'strength_bench_press', sortable: true, searchable: true, label: 'Bench Press' },
 ]
 
 
@@ -90,7 +92,7 @@ const PlayerTable = () => {
     setActivePage(1)
     setFilters({})
     columns.forEach((column) => {
-      document.getElementById(`${column.accessor}-search`).value = "";
+      (document.getElementById(`${column.accessor}-search`) as HTMLInputElement).value = "";
     })
   }
 
@@ -114,18 +116,18 @@ const PlayerTable = () => {
 
                 return (
                   <Th key={column.accessor} className="border-white min-w-[250px] w-full h-full z-40">
-                      <div className='text-white w-full flex items-center gap-5 cursor-pointer' onClick={() => handleSort(column.accessor)}>
+                      <div className='text-white w-full flex items-center gap-5 cursor-pointer' onClick={() => column.sortable && handleSort(column.accessor)}>
                         <Heading size='sm'>{column.label}</Heading>
-                        <button className="text-lg">{sortIcon()}</button>
+                        {column.sortable && <button className="text-lg">{sortIcon()}</button>}
                       </div>
-                      <Input
+                      {column.searchable && <Input
                         key={`${column.accessor}-search`}
                         id={`${column.accessor}-search`}
                         type="search"
                         placeholder={`Search ${column.label}`}
                         value={filters[column.accessor]}
-                        onChange={event => handleSearch(event.target.value, column.accessor)}
-                      />
+                        onChange={event => column.searchable && handleSearch(event.target.value, column.accessor)}
+                      />}
                   </Th>
                 )
               })}

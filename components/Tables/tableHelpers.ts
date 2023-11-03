@@ -70,7 +70,7 @@ export function filterRows(rows: any[], filters: { [key: string]: string | numbe
       }
 
       if (isNumber(value)) {
-        return value == searchValue
+        return (value.toString()).includes(searchValue)
       }
 
       return false

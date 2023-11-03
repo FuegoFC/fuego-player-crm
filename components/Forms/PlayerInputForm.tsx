@@ -76,13 +76,12 @@ const PlayerInputForm = () => {
 							<option key={position.id}>{position.value}</option>
 						))}
 					</Select>
-					<FormControl>
-						<FormLabel>Height</FormLabel>
+
 						<InputGroup size={'sm'}>
+							<InputLeftAddon>Height</InputLeftAddon>
 							<Input type='number' placeholder='Feet' />
 							<Input type='number' placeholder='Inches' />
 						</InputGroup>
-					</FormControl>
 					<InputGroup size={'sm'}>
 						<Input type='number' placeholder='weight' />
 						<InputRightAddon>lbs.</InputRightAddon>

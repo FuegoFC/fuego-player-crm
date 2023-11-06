@@ -1,50 +1,51 @@
 "use client"
 
-import { Box, Heading, InputGroup, InputLeftAddon, Input, Select, InputRightAddon, FormControl, FormLabel } from '@chakra-ui/react'
 import React from 'react'
+import { Box, Heading, InputGroup, InputLeftAddon, Input, InputRightAddon, FormControl, FormLabel } from '@chakra-ui/react'
+import Select from 'react-select';
 import AutocompleteInput from '../Inputs/AutocompleteInput';
 import data from '../../app/assets/data.json'
 
 const POSITION_OPTIONS = [
 	{
-		id: 1,
-		value: 1
+		value: 1,
+		label: '1',
 	},
 	{
-		id: 2,
-		value: 2
+		value: 2,
+		label: '2',
 	},
 	{
-		id: 3,
-		value: 3
+		value: 3,
+		label: '3',
 	},
 	{
-		id: 4,
-		value: 4
+		value: 4,
+		label: '4',
 	},
 	{
-		id: 5,
-		value: 5
+		value: 5,
+		label: '5',
 	},
 	{
-		id: 6,
-		value: 6
+		value: 6,
+		label: '6',
 	},
 	{
-		id: 7,
-		value: 7
+		value: 7,
+		label: '7',
 	},
 	{
-		id: 8,
-		value: 8
+		value: 8,
+		label: '8',
 	},
 	{
-		id: 9,
-		value: 9
+		value: 9,
+		label: '9',
 	},
 	{
-		id: 10,
-		value: 10
+		value: 10,
+		label: '10',
 	}
 ]
 
@@ -71,11 +72,12 @@ const PlayerInputForm = () => {
 					</InputGroup>
 				</Box>
 				<Box className="flex" flexDirection={{ base: 'column', md: 'row' }} gap={'5'}>
-					<Select placeholder='Select Position' size={'sm'}>
-						{POSITION_OPTIONS.map((position) => (
-							<option key={position.id}>{position.value}</option>
-						))}
-					</Select>
+					<Select
+						className="my-react-select-container w-full"
+						classNamePrefix="my-react-select"
+						placeholder='Select Position'
+						options={POSITION_OPTIONS}
+					/>
 
 					<InputGroup size={'sm'}>
 						<InputLeftAddon>Height</InputLeftAddon>
@@ -89,12 +91,20 @@ const PlayerInputForm = () => {
 				</Box>
 				<FormControl>
 					<FormLabel>Autocomplete</FormLabel>
-					<AutocompleteInput
+					<Select
+						className="my-react-select-container"
+						classNamePrefix="my-react-select"
+						options={data.map((player) => ({
+							value: player.id,
+							label: [player.first_name, player.last_name].join(' ')
+						}))}
+					/>
+					{/* <AutocompleteInput
 						options={data.map((player) => ({
 							id: player.id,
 							label: [player.first_name, player.last_name].join(' ')
 						}))}
-					/>
+					/> */}
 				</FormControl>
 			</Box>
 		</Box>

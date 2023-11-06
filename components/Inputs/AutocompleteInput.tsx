@@ -1,5 +1,5 @@
 import { Options } from '@/types/types';
-import { Box, Popover, PopoverArrow, PopoverBody, PopoverContent } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
 import React, { useState } from 'react';
 
 type AutocompleteInputProps = {
@@ -36,20 +36,14 @@ const AutocompleteInput = (props: AutocompleteInputProps) => {
                 onChange={handleInputChange}
                 placeholder="Type something..."
             />
-           <Popover isOpen={inputValue !== ''}>
-                <PopoverContent>
-                    <PopoverArrow>
-                        <PopoverBody>
-                            {suggestions.map((suggestion, index) => (
-                                <Box className='hover:bg-slate-600 hover:text-white dark:hover:bg-gray-300 cursor-pointer' key={index} onClick={() => handleSuggestionClick(suggestion.label.toString())}>
-                                    {suggestion.label}
-                                </Box>
-                            ))}
-                        </PopoverBody>
-                    </PopoverArrow>
-                </PopoverContent>
-                    
-            </Popover>
+           {inputValue !== '' && <Box maxH={'250px'} overflow={'auto'} position={'absolute'}>
+                    {suggestions.map((suggestion, index) => (
+                        <Box className='hover:bg-slate-600 hover:text-white dark:hover:bg-gray-300 cursor-pointer' key={index} onClick={() => handleSuggestionClick(suggestion.label.toString())}>
+                            {suggestion.label}
+                        </Box>
+                    ))}
+            </Box>
+            }
         </Box>
     );
 };

@@ -71,7 +71,7 @@ const PlayerInputForm = () => {
 					</InputGroup>
 				</Box>
 				<Box className="flex" flexDirection={{ base: 'column', md: 'row' }} gap={'5'}>
-					<Select placeholder='Select Position'>
+					<Select placeholder='Select Position' size={'sm'}>
 						{POSITION_OPTIONS.map((position) => (
 							<option key={position.id}>{position.value}</option>
 						))}

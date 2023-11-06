@@ -1,8 +1,8 @@
 [
     {
       "id": 1,
-      "practice-date": "2023-08-15",
-      "practice-stats": {
+      "date": "2023-08-15",
+      "stats": {
         "pass_completion_percent": 87,
         "goals_scored": 2,
         "assists": 1,
@@ -20,8 +20,8 @@
     },
     {
       "id": 2,
-      "practice-date": "2023-08-23",
-      "practice-stats": {
+      "date": "2023-08-23",
+      "stats": {
         "pass_completion_percent": 88,
         "goals_scored": 1,
         "assists": 0,
@@ -39,8 +39,8 @@
     },
     {
       "id": 3,
-      "practice-date": "2023-09-02",
-      "practice-stats": {
+      "date": "2023-09-02",
+      "stats": {
         "pass_completion_percent": 85,
         "goals_scored": 0,
         "assists": 2,
@@ -58,8 +58,8 @@
     },
     {
       "id": 4,
-      "practice-date": "2023-09-10",
-      "practice-stats": {
+      "date": "2023-09-10",
+      "stats": {
         "pass_completion_percent": 90,
         "goals_scored": 1,
         "assists": 1,
@@ -77,8 +77,8 @@
     },
     {
       "id": 5,
-      "practice-date": "2023-09-17",
-      "practice-stats": {
+      "date": "2023-09-17",
+      "stats": {
         "pass_completion_percent": 88,
         "goals_scored": 0,
         "assists": 0,
@@ -96,8 +96,8 @@
     },
     {
       "id": 6,
-      "practice-date": "2023-09-25",
-      "practice-stats": {
+      "date": "2023-09-25",
+      "stats": {
         "pass_completion_percent": 89,
         "goals_scored": 1,
         "assists": 1,

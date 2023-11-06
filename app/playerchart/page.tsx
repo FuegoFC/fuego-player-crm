@@ -6,7 +6,7 @@ import PRACTICEDATA from '../assets/player_match_data.json';
 import Select from 'react-select';
 
 const PlayerCharts = () => {
-    const [selectedPractice, setSelectedPractice] = useState();
+    const [selectedPractice, setSelectedPractice] = useState(PRACTICEDATA[0]);
 
     console.log(selectedPractice);
   return (
@@ -16,11 +16,11 @@ const PlayerCharts = () => {
             classNamePrefix="my-react-select"
             options={PRACTICEDATA.map((practice) => ({
                 value: practice.id,
-                label: practice['practice-date']
+                label: practice.date
             }))}
             onChange={(e) => setSelectedPractice(PRACTICEDATA.find((practice) => practice.id === e?.value))}
         />
-        <DateDonut practiceData={selectedPractice} />
+        <DateDonut practiceDate={selectedPractice.date} practiceStats={selectedPractice.stats} />
     </div>
   )
 }

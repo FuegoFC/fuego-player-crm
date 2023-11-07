@@ -5,6 +5,7 @@ import React, { useState } from 'react'
 import PRACTICEDATA from '../assets/player_match_data.json';
 import Select from 'react-select';
 import { ApexOptions } from 'apexcharts';
+import { Heading } from '@chakra-ui/react';
 
 const STAT_OPTIONS = [
   { value: "pass_completion_percent", label: 'Pass Completion' },
@@ -67,9 +68,9 @@ const options: ApexOptions = {
 
 const PlayerCharts = () => {
   const [selectedStat, setSelectedStat] = useState('');
+  const [statHeading, setStatHeading] = useState('')
   const [practiceDates, setPracticeDates] = useState<any[]>([]);
   const [stats, setStats] = useState<any[]>([]);
-  const [colors, setColors] = useState([])
 
   const handleStatFilter = (key: string) => {
     const practices = [];
@@ -81,7 +82,6 @@ const PlayerCharts = () => {
 
     setPracticeDates(practices);
     setStats(newStats)
-    setColors(newStats.map((s) => `#${Math.floor(Math.random()*16777215).toString(16)}`));
 
   }
 
@@ -94,11 +94,13 @@ const PlayerCharts = () => {
         options={STAT_OPTIONS}
         placeholder='Select A Match Stat...'
         onChange={(e) => {
+          setStatHeading(e?.label);
           setSelectedStat(e?.value)
           handleStatFilter(e?.value)
         }}
       />
-      <DateDonut stats={stats} dates={practiceDates} colors={colors} />
+      <Heading size='md'>{statHeading}</Heading>
+      <DateDonut stats={stats} dates={practiceDates} />
     </div>
   )
 }

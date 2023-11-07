@@ -1,86 +1,62 @@
 "use client";
 import { ApexOptions } from "apexcharts";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import COLORS from '../../app/assets/randomColors.json'
 import dynamic from "next/dynamic";
 const ReactApexChart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
 type DateDonutProps = {
-    practiceDate: any;
-    practiceStats: any;
+    stats: any;
+    dates: any;
 }
 
-const options: ApexOptions = {
-    chart: {
-        type: "donut",
-    },
-    colors: ["#FF5733",
-        "#00A1FF",
-        "#8A2BE2",
-        "#FFD700",
-        "#32CD32",
-        "#8B008B",
-        "#FF4500",
-        "#1E90FF",
-        "#FF69B4",
-        "#ADFF2F",
-        "#9370DB",
-        "#FF6347",
-        "#20B2AA"
-    ],
-    labels: [
-        "Pass Completion",
-        "Goals",
-        "Assists",
-        "Minutes Played",
-        "Shots on Goal",
-        "Shots Off Target",
-        "Tackles",
-        "Interceptions",
-        "Fouls Committed",
-        "Fouls Received",
-        "Yellow Cards",
-        "Red Cards",
-        "Saves"
-    ],
-    legend: {
-        show: true,
-        position: "bottom",
-    },
-
-    plotOptions: {
-        pie: {
-            donut: {
-                size: "65%",
-                background: "transparent",
-            },
-        },
-    },
-    dataLabels: {
-        enabled: false,
-    },
-    responsive: [
-        {
-            breakpoint: 2600,
-            options: {
-                chart: {
-                    width: 380,
-                },
-            },
-        },
-        {
-            breakpoint: 640,
-            options: {
-                chart: {
-                    width: 200,
-                },
-            },
-        },
-    ],
-};
-
 const DateDonut = (props: DateDonutProps) => {
-    const { practiceDate, practiceStats } = props;
+    const { stats, dates } = props;
 
+
+    const options: ApexOptions = {
+        chart: {
+            type: "donut",
+        },
+        colors: stats.map((s, i) => COLORS[i]),
+        labels: dates,
+        legend: {
+            show: true,
+            position: "bottom",
+        },
+    
+        plotOptions: {
+            pie: {
+                donut: {
+                    size: "65%",
+                    background: "transparent",
+                },
+            },
+        },
+        dataLabels: {
+            enabled: false,
+        },
+        responsive: [
+            {
+                breakpoint: 2600,
+                options: {
+                    chart: {
+                        width: 380,
+                    },
+                },
+            },
+            {
+                breakpoint: 640,
+                options: {
+                    chart: {
+                        width: 200,
+                    },
+                },
+            },
+        ],
+    };
+
+    console.log(options, stats);
     return (
         <div className="col-span-12 rounded-sm border border-stroke bg-white px-5 pt-7.5 pb-5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:col-span-5">
             <div className="mb-3 justify-between gap-4 sm:flex">
@@ -127,20 +103,20 @@ const DateDonut = (props: DateDonutProps) => {
                 <div id="chartThree" className="mx-auto flex justify-center">
                     <ReactApexChart
                         options={options}
-                        series={Object.keys(practiceStats).map((key, i) => practiceStats[key])}
+                        series={stats}
                         type="pie"
                     />
                 </div>
             </div>
 
             <div className="-mx-8 flex flex-wrap items-center justify-center gap-y-3">
-                {Object.keys(practiceStats).map((key, i) => (
-                    <div key={key} className="w-full px-8 sm:w-1/2">
+                {stats.map((s, i) => (
+                    <div key={`${dates[i]}`} className="w-full px-8 sm:w-1/2">
                         <div className="flex w-full items-center">
-                            <span className={`mr-2 block h-3 w-full max-w-3 rounded-full bg-[${options.colors[i]}]`}></span>
+                            <span className={`mr-2 block h-3 w-full max-w-3 rounded-full bg-[${COLORS[i]}]`}></span>
                             <p className="flex w-full justify-between text-sm font-medium text-black dark:text-white">
-                                <span>{key}: </span>
-                                <span>{`${practiceStats[key]}${key.includes('percent') ? '%' : ''}`}</span>
+                                <span>{dates[i]}</span>
+                                <span>{s}</span>
                             </p>
                         </div>
                     </div>
